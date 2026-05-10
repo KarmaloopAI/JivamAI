@@ -1,0 +1,77 @@
+---
+layout: default
+---
+
+<div class="breadcrumb">
+  <a href="{{ '/blog/' | relative_url }}">Blog</a>
+  <span>›</span>
+  <span>{{ page.category }}</span>
+  <span>›</span>
+  <span style="color:var(--fg)">{{ page.title | truncate: 40 }}</span>
+</div>
+
+<div class="post-header">
+  <div class="post-cat">✦ {{ page.category }}</div>
+  <h1 class="post-title">{{ page.title }}</h1>
+  {% if page.excerpt_text %}<p class="post-deck">{{ page.excerpt_text }}</p>{% endif %}
+  <div class="post-meta">
+    <div class="post-author">
+      <div class="author-avatar">J</div>
+      <span>{{ page.author | default: "Jivam Team" }}</span>
+    </div>
+    <div class="post-meta-dot"></div>
+    <span>{{ page.date | date: "%b %-d, %Y" }}</span>
+    <div class="post-meta-dot"></div>
+    <span>{{ page.read_time | default: "4 min read" }}</span>
+  </div>
+</div>
+
+<div class="post-hero-img">
+  <div class="post-hero-img-inner" {% if page.thumb_bg %}style="background: {{ page.thumb_bg }}"{% endif %}>
+    <svg width="72" height="72" viewBox="0 0 32 32" fill="none">
+      <circle cx="11" cy="16" r="8.5" stroke="#a99ee0" stroke-width="2.2"/>
+      <circle cx="21" cy="16" r="8.5" stroke="#a99ee0" stroke-width="2.2"/>
+    </svg>
+  </div>
+</div>
+
+<div class="post-body">
+  {{ content }}
+</div>
+
+<div class="author-card">
+  <div class="author-card-inner">
+    <div class="author-avatar-lg">J</div>
+    <div class="author-info">
+      <h4>{{ page.author | default: "Jivam Team" }}</h4>
+      <p>We're a small team building AI tools for India's next generation of knowledge workers. Follow us on <a href="#" style="color:var(--accent)">Twitter</a> for updates.</p>
+    </div>
+  </div>
+</div>
+
+{% include cta-band.html headline="Try Jivam today.<br /><em>It's free.</em>" sub="Available on macOS, Windows, and Linux." button="Download Jivam →" %}
+
+{% assign related_posts = site.posts | where: "category", page.category %}
+{% assign filtered_related = "" | split: "" %}
+{% for p in related_posts %}
+  {% unless p.url == page.url %}
+    {% assign filtered_related = filtered_related | push: p %}
+  {% endunless %}
+{% endfor %}
+
+{% if filtered_related.size > 0 %}
+<div class="related">
+  <h3>More from the blog</h3>
+  <div class="related-grid">
+    {% for rpost in filtered_related limit: 3 %}
+    <a href="{{ rpost.url | relative_url }}" class="related-card">
+      <div class="related-thumb" {% if rpost.thumb_bg %}style="background: {{ rpost.thumb_bg }}"{% else %}style="background: linear-gradient(135deg, #1a2550, #0e1a3d)"{% endif %}></div>
+      <div class="related-body">
+        <div class="related-cat">{{ rpost.category }}</div>
+        <div class="related-title">{{ rpost.title }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

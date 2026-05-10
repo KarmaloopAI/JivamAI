@@ -1,0 +1,45 @@
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" width="22" height="22" alt="Jivam" />
+        Jivam AI
+      </div>
+      <p>A desktop AI client for India's frontier reasoning models. Built on Sarvam and Ola Krutrim Cloud.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <div class="footer-col-links">
+          <a href="{{ '/#features' | relative_url }}">Features</a>
+          <a href="{{ '/changelog/' | relative_url }}">Changelog</a>
+          <a href="{{ '/pricing/' | relative_url }}">Pricing</a>
+          <a href="#">Download</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <div class="footer-col-links">
+          <a href="{{ '/blog/' | relative_url }}">Blog</a>
+          <a href="#">Docs</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <div class="footer-col-links">
+          <a href="#">About</a>
+          <a href="#">Twitter</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {% assign year = site.time | date: '%Y' %}{{ year }} Jivam AI · Powered by Ola Krutrim Cloud</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>

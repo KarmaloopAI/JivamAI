@@ -1,0 +1,75 @@
+---
+layout: page
+title: Blog
+description: "Thoughts on AI, design, engineering, and building for India's next generation of knowledge workers."
+permalink: /blog/
+---
+
+<div class="blog-hero">
+  <p class="eyebrow">Blog</p>
+  <h1>From the<br /><em>Jivam team</em></h1>
+  <p>Thoughts on AI, design, engineering, and building for India's next generation of knowledge workers.</p>
+</div>
+
+<div class="blog-filters">
+  <button class="filter-btn active" data-category="all">All</button>
+  <button class="filter-btn" data-category="Announcement">Announcement</button>
+  <button class="filter-btn" data-category="Engineering">Engineering</button>
+  <button class="filter-btn" data-category="Vision">Vision</button>
+  <button class="filter-btn" data-category="Design">Design</button>
+</div>
+
+{% assign featured = site.posts.first %}
+<a href="{{ featured.url | relative_url }}" class="featured-post">
+  <div class="featured-thumb" {% if featured.thumb_bg %}style="background: {{ featured.thumb_bg }}"{% endif %}>
+    <div class="featured-thumb-deco" style="width:400px;height:400px;top:-100px;left:-100px;"></div>
+    <div class="featured-thumb-deco" style="width:240px;height:240px;bottom:-60px;right:-60px;"></div>
+    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" class="featured-thumb-icon">
+      <circle cx="11" cy="16" r="8.5" stroke="#a99ee0" stroke-width="2.2"/>
+      <circle cx="21" cy="16" r="8.5" stroke="#a99ee0" stroke-width="2.2"/>
+    </svg>
+  </div>
+  <div class="featured-body">
+    <div class="featured-cat">✦ Featured · {{ featured.category }}</div>
+    <div class="featured-title">{{ featured.title }}</div>
+    <div class="featured-excerpt">{{ featured.excerpt | strip_html | truncate: 160 }}</div>
+    <div class="featured-meta">
+      <span>{{ featured.date | date: "%b %-d, %Y" }}</span>
+      <div class="meta-dot"></div>
+      <span>{{ featured.read_time | default: "4 min read" }}</span>
+      <div class="meta-dot"></div>
+      <span>{{ featured.author | default: "Jivam Team" }}</span>
+    </div>
+    <span class="read-link">Read post →</span>
+  </div>
+</a>
+
+<div class="blog-listing-grid">
+  {% for post in site.posts offset: 1 %}
+  <a href="{{ post.url | relative_url }}" class="blog-listing-card" data-category="{{ post.category }}">
+    <div class="blog-listing-thumb" {% if post.thumb_bg %}style="background: {{ post.thumb_bg }}"{% else %}style="background: linear-gradient(135deg, #1a2550 0%, #0e1a3d 100%)"{% endif %}>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7c6fcd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        {% if post.category == 'Engineering' %}
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        {% elsif post.category == 'Vision' %}
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        {% elsif post.category == 'Design' %}
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        {% else %}
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        {% endif %}
+      </svg>
+    </div>
+    <div class="blog-listing-body">
+      <div class="blog-cat">{{ post.category }}</div>
+      <div class="blog-title">{{ post.title }}</div>
+      <div class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</div>
+      <div class="blog-meta">
+        <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+        <div class="blog-meta-sep"></div>
+        <span>{{ post.read_time | default: "4 min read" }}</span>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>

@@ -1,0 +1,35 @@
+title: Jivam AI
+description: "A desktop AI built on India's frontier reasoning model. Chat, code, and soon — cowork."
+url: "https://jivam.ai"
+baseurl: ""
+logo: "/assets/images/logo.png"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+sass:
+  style: compressed
+  silence_deprecations:
+    - import
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/

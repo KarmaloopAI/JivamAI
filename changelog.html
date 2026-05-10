@@ -1,0 +1,138 @@
+---
+layout: page
+title: Changelog
+description: "Every release, documented. We ship fast and tell you exactly what changed."
+permalink: /changelog/
+---
+
+<div class="cl-hero">
+  <p class="eyebrow">Changelog</p>
+  <h1>What's new<br />in <em>Jivam</em></h1>
+  <p>Every release, documented. We ship fast and tell you exactly what changed.</p>
+</div>
+
+<div class="subscribe-bar">
+  <p><strong>Stay in the loop.</strong> Get release notes in your inbox.</p>
+  <div class="subscribe-form">
+    <input class="subscribe-input" type="email" placeholder="you@example.com" />
+    <button class="btn-sm">Subscribe</button>
+  </div>
+</div>
+
+<div class="timeline">
+  <!-- SIDEBAR TOC -->
+  <div class="timeline-sidebar">
+    <h4>Versions</h4>
+    <a href="#v030" class="toc-link current"><span class="toc-version">v0.3.0</span></a>
+    <a href="#v020" class="toc-link"><span class="toc-version">v0.2.0</span></a>
+    <a href="#v010" class="toc-link"><span class="toc-version">v0.1.0</span></a>
+  </div>
+
+  <div class="timeline-entries">
+
+    <!-- v0.3.0 -->
+    <div class="cl-entry" id="v030">
+      <div class="cl-entry-header">
+        <div class="cl-version-badge">v0.3.0</div>
+        <div class="cl-entry-meta">
+          <div class="cl-entry-title">
+            Code Mode &amp; File Attachments
+            <span class="cl-latest"><span class="cl-latest-dot"></span>Latest</span>
+          </div>
+          <div class="cl-entry-date">May 5, 2026</div>
+        </div>
+      </div>
+
+      <div class="cl-image">
+        <div class="cl-image-inner" style="background:linear-gradient(135deg,#1a1245 0%,#0f0a2e 100%);">
+          <span class="cl-image-label">Code Mode screenshot</span>
+        </div>
+      </div>
+
+      <div class="cl-sections">
+        <div>
+          <div class="cl-section-label new">✦ New</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Code Mode</strong> — A focused coding environment with syntax-aware diffs, one-click copy, and line-level commenting.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>File attachments</strong> — Drag and drop files, images, and PDFs directly into any conversation.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Web search</strong> — Jivam can now search the web in real-time when answering questions.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Keyboard shortcuts</strong> — Full keyboard navigation. Press <code>⌘K</code> to open the command palette.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cl-section-label improved">↑ Improved</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot improved"></div><div class="cl-item-text"><strong>Response speed</strong> — Average first-token latency reduced by 40% with streaming improvements.</div></div>
+            <div class="cl-item"><div class="cl-item-dot improved"></div><div class="cl-item-text"><strong>Conversation sidebar</strong> — Grouped by date, searchable, and sortable by recency or name.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cl-section-label fixed">✓ Fixed</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot fixed"></div><div class="cl-item-text">Fixed a crash on Windows 11 when pasting large text blocks.</div></div>
+            <div class="cl-item"><div class="cl-item-dot fixed"></div><div class="cl-item-text">Markdown rendering now correctly handles nested lists and fenced code blocks.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v0.2.0 -->
+    <div class="cl-entry" id="v020">
+      <div class="cl-entry-header">
+        <div class="cl-version-badge">v0.2.0</div>
+        <div class="cl-entry-meta">
+          <div class="cl-entry-title">Dark Mode &amp; System Themes</div>
+          <div class="cl-entry-date">Apr 14, 2026</div>
+        </div>
+      </div>
+      <div class="cl-sections">
+        <div>
+          <div class="cl-section-label new">✦ New</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Dark mode</strong> — Auto-switches with your system theme. Manually override in Settings.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Krutrim Cloud model switcher</strong> — Switch between Sarvam-105B, Krutrim-1, and Llama 3.1 from the toolbar.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Export conversations</strong> — Export any conversation as Markdown or PDF.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cl-section-label improved">↑ Improved</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot improved"></div><div class="cl-item-text"><strong>Token usage display</strong> — See per-message token counts and session totals in the sidebar.</div></div>
+            <div class="cl-item"><div class="cl-item-dot improved"></div><div class="cl-item-text"><strong>Linux packaging</strong> — Now distributed as both .deb and .AppImage.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cl-section-label fixed">✓ Fixed</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot fixed"></div><div class="cl-item-text">Fixed auto-scroll breaking when editing a message mid-stream.</div></div>
+            <div class="cl-item"><div class="cl-item-dot fixed"></div><div class="cl-item-text">Corrected Hindi text rendering alignment in RTL-mixed contexts.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v0.1.0 -->
+    <div class="cl-entry" id="v010">
+      <div class="cl-entry-header">
+        <div class="cl-version-badge">v0.1.0</div>
+        <div class="cl-entry-meta">
+          <div class="cl-entry-title">Initial Release</div>
+          <div class="cl-entry-date">Mar 20, 2026</div>
+        </div>
+      </div>
+      <div class="cl-sections">
+        <div>
+          <div class="cl-section-label new">✦ New</div>
+          <div class="cl-items">
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Conversation Mode</strong> — Full multi-turn conversations powered by Sarvam-105B.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Desktop app</strong> — Available for macOS (Apple Silicon + Intel), Windows 10/11, and Linux (Debian/Ubuntu).</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Conversation history</strong> — Sessions saved locally, searchable from the sidebar.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>Markdown rendering</strong> — Full Markdown support with code highlighting across 40+ languages.</div></div>
+            <div class="cl-item"><div class="cl-item-dot new"></div><div class="cl-item-text"><strong>22 Indian languages</strong> — Native multilingual support via Sarvam-105B.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

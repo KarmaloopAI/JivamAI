@@ -1,0 +1,386 @@
+.pricing-hero {
+  padding: 80px 64px 64px;
+  text-align: center;
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 62px;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    margin-bottom: 16px;
+
+    em { color: var(--accent); font-style: italic; }
+  }
+
+  p {
+    font-size: 17px;
+    color: var(--fg-mid);
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+.billing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0 0;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: var(--fg-mid);
+  font-weight: 500;
+}
+
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 100px;
+  background: var(--accent);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  border: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s;
+  }
+
+  &.annual::after { transform: translateX(20px); }
+}
+
+.save-badge {
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: rgba(40,200,80,0.1);
+  border: 1px solid rgba(40,200,80,0.25);
+  font-size: 12px;
+  font-weight: 600;
+  color: #28c850;
+}
+
+/* Indicative pricing notice */
+.pricing-notice {
+  margin: 32px 64px;
+  padding: 16px 20px;
+  background: rgba(240,160,48,0.08);
+  border: 1px solid rgba(240,160,48,0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--fg-mid);
+  line-height: 1.6;
+
+  svg { flex-shrink: 0; margin-top: 2px; color: #f0a030; }
+  strong { color: var(--fg); }
+}
+
+.pricing-grid {
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 80px;
+  align-items: start;
+}
+
+.plan-card {
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(124,111,205,0.1);
+    transform: translateY(-2px);
+  }
+
+  &.featured {
+    background: #1a1630;
+    border-color: #7c6fcd;
+    box-shadow: 0 0 0 1px rgba(124,111,205,0.3), 0 20px 60px rgba(124,111,205,0.2);
+    transform: scale(1.02);
+
+    &:hover { transform: scale(1.02) translateY(-2px); }
+  }
+}
+
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.plan-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-low);
+  margin-bottom: 16px;
+}
+
+.plan-card.featured .plan-name { color: rgba(240,238,248,0.5); }
+
+.plan-price { margin-bottom: 6px; }
+
+.plan-price .amount {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+
+.plan-card.featured .plan-price .amount { color: #f0eef8; }
+
+.plan-price .currency {
+  font-size: 22px;
+  font-weight: 600;
+  vertical-align: super;
+  margin-right: 2px;
+  color: var(--fg);
+}
+
+.plan-card.featured .plan-price .currency { color: #f0eef8; }
+
+.plan-price .period {
+  font-size: 14px;
+  color: var(--fg-low);
+}
+
+.plan-card.featured .plan-price .period { color: rgba(240,238,248,0.4); }
+
+.plan-desc {
+  font-size: 14px;
+  color: var(--fg-mid);
+  line-height: 1.55;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-card.featured .plan-desc {
+  color: rgba(240,238,248,0.5);
+  border-bottom-color: rgba(240,238,248,0.08);
+}
+
+.plan-features {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+.plan-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--fg-mid);
+}
+
+.plan-card.featured .plan-feature { color: rgba(240,238,248,0.65); }
+
+.check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 10px;
+
+  &.yes { background: rgba(40,200,80,0.15); color: #28c850; }
+  &.no { background: rgba(240,238,248,0.05); color: var(--fg-xlow); }
+  &.accent { background: rgba(124,111,205,0.15); color: var(--accent); }
+}
+
+.plan-cta {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s;
+  border: none;
+  text-align: center;
+
+  &.outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--fg);
+    &:hover { border-color: rgba(124,111,205,0.4); color: var(--accent); }
+  }
+
+  &.filled {
+    background: var(--accent);
+    color: #fff;
+    &:hover { filter: brightness(1.1); }
+  }
+
+  &.dark {
+    background: #f0eef8;
+    color: #1a1630;
+    &:hover { background: #fff; }
+  }
+
+  &.enterprise {
+    background: transparent;
+    border: 1.5px solid rgba(124,111,205,0.35);
+    color: var(--accent);
+    &:hover { background: rgba(124,111,205,0.08); }
+  }
+}
+
+/* Comparison table */
+.comparison {
+  padding: 0 64px 100px;
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-bottom: 40px;
+  }
+}
+
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--fg-low);
+    border-bottom: 1px solid var(--border);
+
+    &:not(:first-child) { text-align: center; width: 14%; }
+  }
+
+  td {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--fg-mid);
+    border-bottom: 1px solid var(--border);
+
+    &:not(:first-child) { text-align: center; }
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(124,111,205,0.03); }
+}
+
+.comp-group td {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 22px 20px 8px;
+  background: transparent !important;
+}
+
+.tick { color: #28c850; font-size: 16px; }
+.cross { color: var(--fg-xlow); font-size: 16px; }
+.comp-highlight { font-weight: 600; color: var(--fg); }
+
+/* FAQ */
+.faq {
+  padding: 0 64px 80px;
+  max-width: 900px;
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+    margin-bottom: 40px;
+  }
+}
+
+.faq-item { border-bottom: 1px solid var(--border); }
+
+.faq-q {
+  width: 100%;
+  text-align: left;
+  padding: 20px 0;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.18s;
+
+  &:hover { color: var(--accent); }
+}
+
+.faq-icon {
+  font-size: 20px;
+  color: var(--fg-low);
+  transition: transform 0.2s, color 0.18s;
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s;
+
+  p {
+    font-size: 15px;
+    color: var(--fg-mid);
+    line-height: 1.7;
+  }
+}
+
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-bottom: 20px;
+}

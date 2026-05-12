@@ -7,3 +7,6 @@ _site/
 vendor/
 # Claude Code internals
 .claude/
+.jiva/
+mcp-shell.log
+

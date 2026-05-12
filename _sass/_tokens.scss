@@ -11,6 +11,7 @@
   --border:      rgba(124,111,205,0.10);
   --border-card: rgba(124,111,205,0.10);
   --nav-bg:      rgba(250,249,255,0.85);
+  --overlay-bg:  rgba(250,249,255,0.95);
   --dl-btn-bg:   #1a1630;
   --dl-btn-fg:   #f0eef8;
   --mode-active-bg: #ffffff;
@@ -32,6 +33,7 @@
     --border:      rgba(240,238,248,0.07);
     --border-card: rgba(240,238,248,0.07);
     --nav-bg:      rgba(15,14,26,0.88);
+    --overlay-bg:  rgba(15,14,26,0.95);
     --dl-btn-bg:   #7c6fcd;
     --dl-btn-fg:   #ffffff;
     --mode-active-bg: rgba(240,238,248,0.05);
@@ -40,6 +42,7 @@
 }
 
 [data-theme="dark"] {
+  --overlay-bg:  rgba(15,14,26,0.95);
   --bg:          #0f0e1a;
   --bg-alt:      #13111f;
   --bg-card:     rgba(240,238,248,0.035);

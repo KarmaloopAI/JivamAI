@@ -196,6 +196,15 @@
 @media (max-width: 600px) {
   .hero-left h1 { font-size: 44px; }
 
+  /* Mobile padding fix for hero left */
+  .hero-left { padding: 40px 16px; }
+
+  /* Constrain hero app frame within viewport */
+  .hero-app-frame { left: 16px; right: 16px; }
+
+  .nav-hamburger { min-height: 44px; }
+  .nav-mobile-overlay a { min-height: 44px; }
+
   .features-header h2,
   .modes-left h2 { font-size: 36px; }
 

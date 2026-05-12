@@ -181,6 +181,18 @@
   }
 }
 
+@media (max-width: 900px) {
+  .dl-grid {
+    grid-template-columns: 1fr;
+    padding: 0 24px 48px;
+  }
+
+  .dl-hero { padding: 60px 24px 40px; }
+  .dl-hero h1 { font-size: 48px; }
+  .dl-footer-note { padding: 0 24px 48px; flex-direction: column; }
+  .dl-footer-note a { margin-left: 0; }
+}
+
 @media (max-width: 600px) {
   .hero-left h1 { font-size: 44px; }
 

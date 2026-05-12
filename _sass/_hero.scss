@@ -111,6 +111,13 @@
   transition: all 0.18s;
 
   &:hover { background: rgba(124,111,205,0.13); color: var(--fg); }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    font-style: italic;
+  }
 }
 
 .hero-note {

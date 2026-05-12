@@ -15,5 +15,8 @@ linux:
   note: "AppImage runs on any distro. .deb for Debian/Ubuntu."
 
 windows:
-  available: false
-  note: "Windows support is coming soon."
+  available: true
+  setup: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam.Setup.0.1.0.exe"
+  portable: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam.0.1.0.exe"
+  label: "Windows 10 / 11"
+  note: "Installer recommended. Portable .exe requires no installation."

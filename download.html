@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Download Jivam
-description: "Download Jivam AI for macOS and Linux. Free to download — bring your own API key or use our managed access."
+description: "Download Jivam AI for macOS, Windows, and Linux. Free to download — bring your own API key or use our managed access."
 permalink: /download/
 ---
 
@@ -53,18 +53,22 @@ permalink: /download/
   </div>
 
   <!-- Windows -->
-  <div class="dl-card coming-soon">
-    <div class="dl-card-icon muted">
+  <div class="dl-card">
+    <div class="dl-card-icon">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801"/></svg>
     </div>
-    <div class="dl-soon-badge">Coming soon</div>
-    <h3>Windows</h3>
+    <h3>{{ site.data.downloads.windows.label }}</h3>
     <p class="dl-note">{{ site.data.downloads.windows.note }}</p>
     <div class="dl-actions">
-      <button class="dl-btn primary" disabled>Not yet available</button>
+      <a href="{{ site.data.downloads.windows.setup }}" class="dl-btn primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Installer (.exe)
+      </a>
+      <a href="{{ site.data.downloads.windows.portable }}" class="dl-btn secondary">Portable .exe</a>
     </div>
     <div class="dl-fileinfo">
-      <span class="dl-tag muted">Windows 10/11</span>
+      <span class="dl-tag">Windows 10/11</span>
+      <span class="dl-tag">x64</span>
     </div>
   </div>
 

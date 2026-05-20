@@ -1,8 +1,14 @@
-name: Update download links on release
+name: Update download links
 
 on:
   release:
     types: [published]
+  push:
+    branches: [main]
+    paths-ignore:
+      # Ignore commits made by this workflow itself to avoid an infinite loop
+      - '_data/downloads.yml'
+  workflow_dispatch:
 
 jobs:
   update-downloads:
@@ -15,9 +21,29 @@ jobs:
         with:
           ref: main
 
-      - name: Write _data/downloads.yml
+      - name: Resolve release tag
+        id: tag
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            # Tag comes directly from the release event
+            echo "tag=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          else
+            # Push / manual run — fetch the latest published release
+            TAG=$(gh release list --repo KarmaloopAI/JivamAI --limit 1 --json tagName -q '.[0].tagName' 2>/dev/null || echo "")
+            if [[ -z "$TAG" ]]; then
+              echo "No published releases found — skipping"
+              echo "tag=" >> $GITHUB_OUTPUT
+            else
+              echo "tag=$TAG" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Write _data/downloads.yml
+        if: steps.tag.outputs.tag != ''
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
         run: |
           VERSION="${TAG#v}"
           BASE="https://github.com/KarmaloopAI/JivamAI/releases/download/${TAG}"
@@ -48,12 +74,13 @@ jobs:
           EOF
 
       - name: Commit and push
+        if: steps.tag.outputs.tag != ''
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ steps.tag.outputs.tag }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add _data/downloads.yml
-          git diff --cached --quiet && echo "No changes" && exit 0
+          git diff --cached --quiet && echo "Already up to date" && exit 0
           git commit -m "chore: update download links for ${TAG}"
           git push

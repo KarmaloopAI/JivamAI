@@ -1,22 +1,22 @@
-version: "0.1.0"
-release_url: "https://github.com/KarmaloopAI/JivamAI/releases/tag/v0.1.0"
+version: "0.1.1"
+release_url: "https://github.com/KarmaloopAI/JivamAI/releases/tag/v0.1.1"
 
 mac:
-  dmg: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam-0.1.0-universal.dmg"
-  zip: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam-0.1.0-universal-mac.zip"
+  dmg: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-universal.dmg"
+  zip: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-universal-mac.zip"
   label: "macOS (Apple Silicon + Intel)"
   note: "Universal binary — works on both Apple Silicon and Intel Macs"
 
 linux:
-  appimage_x64: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam-0.1.0.AppImage"
-  appimage_arm64: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam-0.1.0-arm64.AppImage"
-  deb: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/jivam_0.1.0_amd64.deb"
+  appimage_x64: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-x86_64.AppImage"
+  appimage_arm64: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-arm64.AppImage"
+  deb: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/jivam_0.1.1_amd64.deb"
   label: "Linux (x86_64 & ARM64)"
   note: "AppImage runs on any distro. .deb for Debian/Ubuntu."
 
 windows:
   available: true
-  setup: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam.Setup.0.1.0.exe"
-  portable: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.0/Jivam.0.1.0.exe"
+  setup: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-Setup-0.1.1.exe"
+  portable: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-portable.exe"
   label: "Windows 10 / 11"
   note: "Installer recommended. Portable .exe requires no installation."

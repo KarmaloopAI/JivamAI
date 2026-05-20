@@ -1,0 +1,59 @@
+name: Update download links on release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-downloads:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Write _data/downloads.yml
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION="${TAG#v}"
+          BASE="https://github.com/KarmaloopAI/JivamAI/releases/download/${TAG}"
+
+          cat > _data/downloads.yml <<EOF
+          version: "${VERSION}"
+          release_url: "https://github.com/KarmaloopAI/JivamAI/releases/tag/${TAG}"
+
+          mac:
+            dmg: "${BASE}/Jivam-${VERSION}-universal.dmg"
+            zip: "${BASE}/Jivam-${VERSION}-universal-mac.zip"
+            label: "macOS (Apple Silicon + Intel)"
+            note: "Universal binary — works on both Apple Silicon and Intel Macs"
+
+          linux:
+            appimage_x64: "${BASE}/Jivam-${VERSION}-x86_64.AppImage"
+            appimage_arm64: "${BASE}/Jivam-${VERSION}-arm64.AppImage"
+            deb: "${BASE}/jivam_${VERSION}_amd64.deb"
+            label: "Linux (x86_64 & ARM64)"
+            note: "AppImage runs on any distro. .deb for Debian/Ubuntu."
+
+          windows:
+            available: true
+            setup: "${BASE}/Jivam-Setup-${VERSION}.exe"
+            portable: "${BASE}/Jivam-${VERSION}-portable.exe"
+            label: "Windows 10 / 11"
+            note: "Installer recommended. Portable .exe requires no installation."
+          EOF
+
+      - name: Commit and push
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/downloads.yml
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: update download links for ${TAG}"
+          git push

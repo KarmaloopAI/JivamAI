@@ -20,3 +20,4 @@ windows:
   portable: "https://github.com/KarmaloopAI/JivamAI/releases/download/v0.1.1/Jivam-0.1.1-portable.exe"
   label: "Windows 10 / 11"
   note: "Installer recommended. Portable .exe requires no installation."
+

@@ -25,10 +25,109 @@
 
 .dl-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 0 64px 64px;
   align-items: start;
+}
+
+.dl-cmd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card-alt, rgba(124,111,205,0.06));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+
+  code {
+    flex: 1;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    font-size: 13px;
+    color: var(--fg);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+.dl-copy {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg-mid);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { border-color: rgba(124,111,205,0.4); color: var(--accent); }
+}
+
+.dl-steps-section {
+  padding: 24px 64px 64px;
+  max-width: 760px;
+  margin: 0 auto;
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    color: var(--fg);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+
+.dl-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  li {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--fg-mid);
+    line-height: 1.65;
+
+    code {
+      font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+      font-size: 12.5px;
+      background: rgba(124,111,205,0.08);
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.dl-step-num {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(124,111,205,0.1);
+  border: 1px solid rgba(124,111,205,0.25);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .dl-card {

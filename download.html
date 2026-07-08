@@ -57,7 +57,7 @@ permalink: /download/
       <span class="dl-step-num">1</span>
       <div>
         <h4>Checks (and installs) Node.js</h4>
-        <p>If Node.js 18+ isn't already on your machine, the script installs the latest LTS release for you — nothing to do manually.</p>
+        <p>If Node.js 20+ isn't already on your machine, the script installs the latest LTS release for you — nothing to do manually, and no admin rights required (on Windows, it falls back to a per-user install if it can't get elevated permissions).</p>
       </div>
     </li>
     <li>
@@ -70,15 +70,15 @@ permalink: /download/
     <li>
       <span class="dl-step-num">3</span>
       <div>
-        <h4>Sets up a native app icon and background service</h4>
-        <p>On macOS, this opens Jivam in Safari and shows you exactly where to click — File → Add to Dock — to turn it into a real app with its own Dock icon (no separate browser install needed, and no permission prompts to click through). On Windows, it creates a Desktop shortcut and Start Menu entry. Either way, Jivam also registers itself as a background service (a macOS LaunchAgent or Windows Scheduled Task) so it's already running by the time you open it — no more waiting on a blank page.</p>
+        <h4>Sets up a native app and background service</h4>
+        <p>This opens Jivam in your browser and shows you exactly where to click to turn it into a real app with its own icon — File → Add to Dock in Safari on macOS, or the install icon in Edge's address bar on Windows. No separate browser to install, and no permission prompts to click through. Either way, Jivam also registers itself as a background service (a macOS LaunchAgent or Windows Scheduled Task) so it's already running by the time you open it — no more waiting on a blank page.</p>
       </div>
     </li>
     <li>
       <span class="dl-step-num">4</span>
       <div>
         <h4>Launch it</h4>
-        <p>Click the <strong>Jivam</strong> icon in your Dock (macOS) or double-click it on your Desktop (Windows). Jivam opens in its own app window, served locally from your machine — nothing leaves your computer except your model API calls. It auto-updates in the background each time you open it.</p>
+        <p>Click the <strong>Jivam</strong> icon in your Dock or Start Menu. Jivam opens in its own app window, served locally from your machine — nothing leaves your computer except your model API calls. It auto-updates in the background each time you open it.</p>
       </div>
     </li>
   </ol>

@@ -139,6 +139,12 @@
   flex-direction: column;
   gap: 0;
   position: relative;
+  // Grid items default to min-width: auto, which lets a long unwrapped
+  // install command (inside .dl-cmd code, which has its own overflow-x:auto)
+  // force this whole card — and with it .dl-grid and the page itself —
+  // wider than the viewport on mobile. min-width: 0 lets the card actually
+  // shrink to its grid track and defer overflow handling to the code block.
+  min-width: 0;
   transition: box-shadow 0.2s, transform 0.2s;
 
   &:hover { box-shadow: 0 12px 40px rgba(124,111,205,0.1); transform: translateY(-2px); }

@@ -320,8 +320,18 @@
   }
 }
 
+// The table's own natural min-content width (five columns of text) is
+// wider than a phone viewport. Rather than shrinking columns to
+// illegibility, let the table scroll horizontally within its own wrapper
+// instead of forcing the whole page wider.
+.comp-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .comp-table {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
 
   th {

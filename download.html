@@ -1,33 +1,31 @@
 ---
 layout: page
 title: Download Jivam
-description: "Install Jivam AI on macOS, Windows, or Linux with one command. Free to download — bring your own API key or use our managed access."
+description: "Install Jivam AI on macOS or Windows with one command. A native Ubuntu app is on the way; today Linux runs in your browser. Free to download — bring your own API key or use our managed access."
 permalink: /download/
 ---
 
 <div class="dl-hero">
   <p class="eyebrow">Download</p>
   <h1>Get Jivam <em>running.</em></h1>
-  <p>One command sets up Node.js, installs Jivam, and gets it running as a native app on your machine. Free to use with your own Sarvam AI or Krutrim Cloud API key.</p>
+  <p>One command sets up Node.js, installs Jivam, and puts it on your computer as a desktop app. Free to use with your own Sarvam AI or Krutrim Cloud API key.</p>
 </div>
 
 <div class="dl-grid">
 
-  <!-- macOS / Linux -->
+  <!-- macOS -->
   <div class="dl-card">
     <div class="dl-card-icon">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
     </div>
-    <h3>macOS &amp; Linux</h3>
-    <p class="dl-note">Run this in Terminal. Works on Apple Silicon, Intel, and any Linux distro.</p>
+    <h3>macOS</h3>
+    <p class="dl-note">Run this in Terminal. It adds Jivam to your Applications folder.</p>
     <div class="dl-cmd">
       <code>curl -fsSL https://jivamai.com/install.sh | bash</code>
       <button class="dl-copy" type="button" data-copy="curl -fsSL https://jivamai.com/install.sh | bash" aria-label="Copy command">Copy</button>
     </div>
     <div class="dl-fileinfo">
-      <span class="dl-tag">macOS 12+</span>
-      <span class="dl-tag">Apple Silicon &amp; Intel</span>
-      <span class="dl-tag">Linux (x86_64 &amp; ARM64)</span>
+      <span class="dl-tag">Uses the WebKit built into macOS</span>
     </div>
   </div>
 
@@ -37,7 +35,7 @@ permalink: /download/
       <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801"/></svg>
     </div>
     <h3>Windows</h3>
-    <p class="dl-note">Run this in PowerShell — no admin rights needed.</p>
+    <p class="dl-note">Run this in PowerShell — no admin rights needed. It adds Jivam to your Start menu and Desktop.</p>
     <div class="dl-cmd">
       <code>irm https://jivamai.com/install.ps1 | iex</code>
       <button class="dl-copy" type="button" data-copy="irm https://jivamai.com/install.ps1 | iex" aria-label="Copy command">Copy</button>
@@ -49,7 +47,24 @@ permalink: /download/
     </div>
     <div class="dl-fileinfo">
       <span class="dl-tag">Windows 10/11</span>
-      <span class="dl-tag">x64</span>
+      <span class="dl-tag">Uses Microsoft WebView2 (set up for you if it's missing)</span>
+    </div>
+  </div>
+
+  <!-- Linux -->
+  <div class="dl-card dl-card-wide">
+    <div class="dl-card-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg>
+    </div>
+    <h3>Linux</h3>
+    <p class="dl-note">A native Ubuntu app is coming. Until then Jivam runs in your browser: run the installer, then start it with <code>jivam serve</code> and open the address it prints.</p>
+    <div class="dl-cmd">
+      <code>curl -fsSL https://jivamai.com/install.sh | bash</code>
+      <button class="dl-copy" type="button" data-copy="curl -fsSL https://jivamai.com/install.sh | bash" aria-label="Copy command">Copy</button>
+    </div>
+    <div class="dl-fileinfo">
+      <span class="dl-tag">Runs in your browser today</span>
+      <span class="dl-tag muted">Desktop app: coming soon</span>
     </div>
   </div>
 
@@ -75,33 +90,54 @@ permalink: /download/
     <li>
       <span class="dl-step-num">3</span>
       <div>
-        <h4>Sets up a native app and background service</h4>
-        <p>This opens Jivam in your browser and shows you exactly where to click to turn it into a real app with its own icon — File → Add to Dock in Safari on macOS, or the install icon in Edge's address bar on Windows. No separate browser to install, and no permission prompts to click through. Either way, Jivam also registers itself as a background service — a macOS LaunchAgent, or on Windows a lightweight entry in your own Startup folder, no admin rights needed — so it's already running by the time you open it. No more waiting on a blank page.</p>
+        <h4>Builds the app on your computer</h4>
+        <p>The script runs <code>jivam install</code>, which makes a small launcher for Jivam right on your machine: <code>Jivam.app</code> in your Applications folder on macOS, a Start menu and Desktop shortcut on Windows. The window is the web view your system already has (WebKit on macOS, WebView2 on Windows), so there is no big download, no signed installer for your system to question, and no background service. If an older version of Jivam left a background service or a Safari or Edge web app behind, the installer removes it. On a Windows 10 PC without WebView2, it offers Microsoft's own installer.</p>
       </div>
     </li>
     <li>
       <span class="dl-step-num">4</span>
       <div>
         <h4>Launch it</h4>
-        <p>Click the <strong>Jivam</strong> icon in your Dock or Start Menu. Jivam opens in its own app window, served locally from your machine — nothing leaves your computer except your model API calls. It auto-updates in the background each time you open it.</p>
+        <p>Jivam opens when the install finishes. After that, start it from Launchpad, Spotlight or the Dock on macOS, or from the Start menu on Windows. Closing the window quits Jivam. It runs only on your computer — nothing leaves it except your model API calls. When a new version is out Jivam tells you, and one click on <strong>Update</strong> installs it and restarts Jivam.</p>
       </div>
     </li>
   </ol>
 </div>
 
-<div class="dl-video-section">
+<div class="dl-steps-section dl-help-section">
   <h2>Stuck on install?</h2>
-  <p class="dl-video-note">Watch a full walkthrough of the install process, start to finish.</p>
-  <div class="dl-video-embed">
-    <iframe
-      src="https://www.youtube.com/embed/VRtMC4hjugg"
-      title="Jivam install walkthrough"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <ul class="dl-steps">
+    <li>
+      <div>
+        <h4>Ask Jivam what's wrong</h4>
+        <p>Run <code>jivam check</code>. It tests the app launcher and the window and says which one fails.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h4>Read the log</h4>
+        <p>Jivam writes what it did to <code>~/.jivam/jivam.log</code> (on Windows, <code>%USERPROFILE%\.jivam\jivam.log</code>).</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h4>Run the installer again</h4>
+        <p>It is safe to repeat. <code>jivam install</code> alone rebuilds just the app.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h4>Remove the app</h4>
+        <p><code>jivam uninstall</code> removes the app. Your settings, API keys and conversations stay in <code>~/.jivam</code>.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h4>Still stuck?</h4>
+        <p>Email <a href="mailto:hello@jivamai.com">hello@jivamai.com</a> with the last lines of the log.</p>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <div class="dl-footer-note">

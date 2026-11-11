@@ -9,6 +9,10 @@ read_time: "6 min read"
 thumb_bg: "linear-gradient(135deg, #1c2a4a 0%, #0d1530 100%)"
 ---
 
+<div class="callout">
+<strong>Update, November 2026.</strong> The install steps described below (Safari's "Add to Dock", Edge's "Install this site as an app", and the background service) were replaced in Jivam 0.2.36. <code>jivam install</code> now builds a small launcher on your machine that opens Jivam in a native window, with no background service. Closing the window quits Jivam. The current steps are on the <a href="/download/">download page</a>.
+</div>
+
 For the first several months of Jivam's life, the desktop app was an Electron app — like most desktop AI tools. It worked. It also came with a set of tradeoffs we'd been quietly unhappy with for a while: a large download, a slower startup, and a code-signing bill that scaled with every platform we supported. We've spent the last stretch replacing that foundation entirely, and the app you're installing today is a genuinely different piece of software from the one we shipped a few months ago.
 
 ## What Electron was costing us

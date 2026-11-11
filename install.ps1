@@ -1,5 +1,5 @@
 # Jivam installer for Windows
-# Usage (run in PowerShell as a normal user — admin rights are not required):
+# Usage (run in PowerShell as a normal user - admin rights are not required):
 #   irm https://jivamai.com/install.ps1 | iex
 #
 # Requires PowerShell 5.1+ (built into Windows 10/11). If Node.js needs to be
@@ -8,28 +8,25 @@
 # rights) or winget isn't available, this falls back to a portable, per-user
 # Node.js install that needs no elevation at all.
 #
-# Mirrored from KarmaloopAI/Jivam's scripts/install.ps1 — keep the two in sync
-# whenever the install flow changes (see that repo's CLAUDE.md).
+# Mirrored from KarmaloopAI/Jivam's scripts/install.ps1. Do not edit here: change it in that
+# repo and run scripts/sync-website-installers.js there.
 
 $ErrorActionPreference = 'Stop'
 
-$Purple = [char]27 + '[35m'
-$Green  = [char]27 + '[32m'
-$Yellow = [char]27 + '[33m'
-$Bold   = [char]27 + '[1m'
-$Reset  = [char]27 + '[0m'
+# Plain Write-Host colours and ASCII markers: Windows PowerShell 5.1 (the one
+# every Windows 10/11 PC has) does not understand the `u{...} escape, and its
+# console does not always interpret raw ANSI codes.
+function Log    { param($msg) Write-Host "> " -ForegroundColor Magenta -NoNewline; Write-Host $msg }
+function Ok     { param($msg) Write-Host "OK " -ForegroundColor Green -NoNewline; Write-Host $msg }
+function Warn   { param($msg) Write-Host "!  " -ForegroundColor Yellow -NoNewline; Write-Host $msg }
+function Header { param($msg) Write-Host ""; Write-Host $msg -ForegroundColor Magenta; Write-Host "" }
 
-function Log    { param($msg) Write-Host "$Purple`u{25B8}$Reset $msg" }
-function Ok     { param($msg) Write-Host "$Green`u{2713}$Reset $msg" }
-function Warn   { param($msg) Write-Host "$Yellow`u{26A0}$Reset  $msg" }
-function Header { param($msg) Write-Host "`n$Bold$Purple$msg$Reset`n" }
-
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 Header "Jivam Installer"
-Write-Host "  This will install Jivam and set it up on your Windows PC."
+Write-Host "  This will install Jivam and add it to your Windows PC as an app."
 Write-Host ""
 
-# ── 1. Node.js ───────────────────────────────────────────────────────────────
+# -- 1. Node.js ---------------------------------------------------------------
 Header "Step 1 of 3 - Node.js"
 
 function Get-NodeMajor {
@@ -39,7 +36,7 @@ function Get-NodeMajor {
     } catch { return 0 }
 }
 
-# jiva-core requires Node >=20 (see its package.json "engines" field) — this
+# jiva-core requires Node >=20 (see its package.json "engines" field) - this
 # used to check >=18, which let an already-too-old Node quietly pass.
 $nodeMajor = Get-NodeMajor
 
@@ -52,15 +49,15 @@ if ($nodeMajor -ge 20) {
         Warn "Node.js not found. Installing..."
     }
 
-    # Try winget first — fast and keeps Node on the system PATH the normal
+    # Try winget first - fast and keeps Node on the system PATH the normal
     # way. NOTE: this can still trigger a UAC elevation prompt, since Node's
     # official winget package installs machine-wide (Program Files) rather
     # than declaring per-user scope. If winget isn't present, or its install
-    # didn't actually succeed (e.g. the user can't elevate — no admin
+    # didn't actually succeed (e.g. the user can't elevate - no admin
     # rights, UAC prompt dismissed), fall through to a portable install that
     # needs no elevation at all: download the plain Node.js zip and unpack
     # it into the user's own AppData, then prepend it to the *User* PATH
-    # (not Machine) — a pure per-user operation, no installer/UAC involved.
+    # (not Machine) - a pure per-user operation, no installer/UAC involved.
     $wingetOk = $false
     if (Get-Command winget -ErrorAction SilentlyContinue) {
         Log "Installing Node.js LTS via winget..."
@@ -71,7 +68,7 @@ if ($nodeMajor -ge 20) {
             if ((Get-NodeMajor) -ge 20) { $wingetOk = $true }
         }
         if (-not $wingetOk) {
-            Warn "winget install didn't take (often needs admin approval) — falling back to a portable install that needs no elevation."
+            Warn "winget install didn't take (often needs admin approval) - falling back to a portable install that needs no elevation."
         }
     }
 
@@ -91,12 +88,20 @@ if ($nodeMajor -ge 20) {
         Expand-Archive -Path $zipPath -DestinationPath $nodeDir -Force
         Remove-Item $zipPath -Force
 
-        # The zip extracts into a version-named subfolder — flatten it up one level.
+        # A zip downloaded via Invoke-WebRequest carries a Mark-of-the-Web
+        # zone identifier; Windows can propagate it onto every extracted
+        # file, causing AV/Smart App Control to silently block node.exe from
+        # running the first time it's invoked. Unblock-File is the standard,
+        # safe remediation - this is a file we just downloaded ourselves and
+        # extracted, not third-party content the user asked us to run.
+        Get-ChildItem -Path $nodeDir -Recurse | Unblock-File -ErrorAction SilentlyContinue
+
+        # The zip extracts into a version-named subfolder - flatten it up one level.
         $extracted = Get-ChildItem $nodeDir -Directory | Select-Object -First 1
         Get-ChildItem $extracted.FullName | Move-Item -Destination $nodeDir -Force
         Remove-Item $extracted.FullName -Force
 
-        # Prepend to the *User* PATH (not Machine — that would need admin).
+        # Prepend to the *User* PATH (not Machine - that would need admin).
         $userPath = [System.Environment]::GetEnvironmentVariable('Path','User')
         if ($userPath -notlike "*$nodeDir*") {
             [System.Environment]::SetEnvironmentVariable('Path', "$nodeDir;$userPath", 'User')
@@ -115,30 +120,45 @@ if ($nodeMajor -ge 20) {
 
 Ok "Node.js $(node --version) ready"
 
-# ── 2. Install jivam + jiva-core ─────────────────────────────────────────────
+# A `prefix`/`globalconfig` override in ~/.npmrc (left over from a manual
+# `npm config set prefix ...`, or another Node version manager) can silently
+# redirect `npm install -g` to a directory that's not on PATH - the global
+# install reports success but `jivam` is never found afterward. Same class
+# of bug already fixed for nvm on macOS/Linux (sanitize_npmrc_for_nvm in
+# install.sh); Windows never had an equivalent check.
+function Repair-NpmrcForGlobalInstall {
+    $npmrcPath = "$HOME\.npmrc"
+    if (-not (Test-Path $npmrcPath)) { return }
+    $lines = Get-Content $npmrcPath
+    if ($lines | Where-Object { $_ -match '^\s*(prefix|globalconfig)\s*=' }) {
+        Warn "Removing prefix/globalconfig from ~/.npmrc (can redirect global installs off PATH) - backed up to ~/.npmrc.bak"
+        Copy-Item $npmrcPath "$npmrcPath.bak" -Force
+        $lines | Where-Object { $_ -notmatch '^\s*(prefix|globalconfig)\s*=' } | Set-Content $npmrcPath
+    }
+}
+Repair-NpmrcForGlobalInstall
+
+# -- 2. Install jivam + jiva-core ---------------------------------------------
 Header "Step 2 of 3 - Installing Jivam"
 Log "Installing jivam and jiva-core globally..."
 npm install -g jivamai jiva-core
 Ok "jivam installed"
 Ok "jiva-core installed"
 
-# ── 3. Background service + Edge app setup ───────────────────────────────────
-# Jivam sets up a Startup-folder entry (no admin needed — a Scheduled Task's
-# logon trigger would require it) so the server runs in the background, then
-# opens Edge (installed by default on every Windows PC — no separate browser
-# needed) to a page with on-screen instructions for the one manual step —
-# installing Jivam as an app via Edge's own "Install this site as an app" —
-# and waits in the background for it to complete.
+# -- 3. The Jivam app ---------------------------------------------------------
+# `jivam install` adds Jivam to the Start menu (and Desktop), using the
+# Microsoft WebView2 runtime that ships with Windows 11 and current Edge for
+# its window. If WebView2 is missing it offers to install Microsoft's signed
+# runtime (no admin rights needed). It also removes the old background
+# service and Edge web app shortcut if an earlier version left them, then
+# opens Jivam. Same as running it by hand after `npm i -g jivamai jiva-core`.
 Header "Step 3 of 3 - Setting up the Jivam app"
-Log "Opening Edge — follow the on-screen instructions to install Jivam as an app..."
-jivam --install
-Ok "Background service running"
+jivam install
 
-# ── Done ─────────────────────────────────────────────────────────────────────
+# -- Done ---------------------------------------------------------------------
 Write-Host ""
-Write-Host "$Bold${Green}All done!$Reset Jivam is installed." -NoNewline
+Write-Host "All done! Jivam is installed." -ForegroundColor Green
 Write-Host ""
-Write-Host ""
-Write-Host "  Double-click the $Bold`Jivam$Reset icon on your Desktop to launch."
-Write-Host "  Jivam will auto-update in the background each time you open it."
+Write-Host "  Jivam is open. Next time, launch it from the Start menu or the Jivam icon on your Desktop."
+Write-Host "  Jivam tells you when an update is available."
 Write-Host ""

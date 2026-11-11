@@ -2,8 +2,8 @@
 # Jivam installer for macOS (and Linux)
 # Usage: curl -fsSL https://jivamai.com/install.sh | bash
 #
-# Mirrored from KarmaloopAI/Jivam's scripts/install.sh — keep the two in sync
-# whenever the install flow changes (see that repo's CLAUDE.md).
+# Mirrored from KarmaloopAI/Jivam's scripts/install.sh. Do not edit here: change it in that
+# repo and run scripts/sync-website-installers.js there.
 set -euo pipefail
 
 JIVAM_COLOR='\033[0;35m'
@@ -21,7 +21,7 @@ header() { echo -e "\n${BOLD}${JIVAM_COLOR}$*${NC}\n"; }
 
 # ─────────────────────────────────────────────────────────────────────────────
 header "Jivam Installer"
-echo "  This will install Jivam and set it up as a native app on your Mac."
+echo "  This will install Jivam on this computer."
 echo ""
 
 # ── 1. Check OS ──────────────────────────────────────────────────────────────
@@ -120,17 +120,15 @@ npm install -g jivamai jiva-core
 ok "jivam $(jivam --version 2>/dev/null || node -e "const p=require('$(npm root -g)/jivamai/package.json');console.log(p.version)" 2>/dev/null || echo '') installed"
 ok "jiva-core installed"
 
-# ── 4. App bundle + Dock (macOS) ─────────────────────────────────────────────
-# Jivam runs as a genuine Safari web app on macOS — a real, separate .app
-# bundle with its own Dock icon (Safari's "Add to Dock", macOS Sonoma+).
-# `jivam --install` opens Safari to a plain tab with on-screen instructions
-# for the one manual step Safari requires (File > Add to Dock…), then waits
-# in the background for the resulting app bundle to appear — no
-# Accessibility permission needed for any of this.
+# ── 4. The Jivam app (macOS) ─────────────────────────────────────────────────
+# `jivam install` builds ~/Applications/Jivam.app on this Mac (a thin app that
+# uses macOS's own WebKit for its window — nothing is downloaded that macOS
+# would need to trust), removes the old background service and Safari web app
+# if an earlier version left them, and opens Jivam. Same as running it by hand
+# after `npm i -g jivamai jiva-core`.
 if [[ "$OS" == "Darwin" ]]; then
   header "Step 3 of 3 — Setting up the Jivam app"
-  log "Opening Safari — follow the on-screen instructions to add Jivam to your Dock..."
-  jivam --install
+  jivam install
 fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
@@ -138,9 +136,9 @@ echo ""
 echo -e "${BOLD}${GREEN}All done!${NC} Jivam is installed."
 echo ""
 if [[ "$OS" == "Darwin" ]]; then
-  echo "  Click the ${BOLD}Jivam${NC} icon in your Dock to launch."
-  echo "  The app will auto-update in the background each time you open it."
+  echo "  Jivam is open. Next time, launch it from Applications, Spotlight or the Dock (right-click its icon > Options > Keep in Dock)."
+  echo "  Jivam tells you when an update is available."
 else
-  echo "  Run ${BOLD}jivam${NC} in your terminal to start."
+  echo -e "  Linux has no native Jivam window yet. Run ${BOLD}jivam serve${NC} to use it in your browser."
 fi
 echo ""
